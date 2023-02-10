@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  mysql:
+    image: mysql:8.0.28
+    environment:
+      MYSQL_DATABASE: 'mysqldb'
+      MYSQL_ROOT_PASSWORD: '01emil01'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+  project-db-service:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - '9022:9022'
+    expose:
+      - '9022'
+    tty: true
+    depends_on:
+      - mysql
